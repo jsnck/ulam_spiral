@@ -1,12 +1,26 @@
+#import
 from math import sqrt
 import wx 
+
+#import functions
+from check_prime import check_Prime
  
 ###############################
 ########### ulam spiral #######
 ###############################
 
-app = wx.App() 
+app = wx.App()
 
+#####application#####
+#####variables#####
+#fix
+direction = 0 #0=start, 1=rigth, 2=up, 3=left, 4=down
+stepCounter = 1
+tmpCounter = 0
+iteration = 0
+
+#change here number of steps and range
+numberRange = 100000
 #####size of window#####
 #get size of display
 width, height = wx.GetDisplaySize()
@@ -14,32 +28,13 @@ width, height = wx.GetDisplaySize()
 windowWidth = width*0.6
 windowHeight = height*0.6
 
-#####variables#####
-#fix
-direction = 0 #0=start, 1=rigth, 2=up, 3=left, 4=down
 curPosX = (windowWidth/2)
 curPosY = (windowHeight/2)
-stepCounter = 1
-tmpCounter = 0
-iteration = 0
-
-#change here number of steps and range
-numberRange = 100000
 step = (windowWidth/numberRange) + 1
 
-#####application#####
 #create window
-window = wx.Frame(None, title = "wxPython Frame", size = (windowWidth,windowHeight))
+window = wx.Frame(None, title = "Ulam spiral", size = (windowWidth,windowHeight))
 panel = wx.Panel(window)
-
-#function to check if current number is prime
-def check_Prime(i):
-    if(i > 1):
-        for j in range(2, i-1):
-            if i % j == 0:
-                 return False
-        return True
-    return False
 
 
 #print spiral
@@ -76,14 +71,5 @@ for i in range (1, numberRange+1):
             tmpCounter = 0
             iteration = 1
 
-
-#to-do
-    #performance
-    #change variables in application (step number, number of values, displayed char)
-    #as new project in git
-    #zoom?
-    #
-            
-#main loop 
 window.Show(True) 
 app.MainLoop()
