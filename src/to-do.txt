@@ -1,4 +1,5 @@
 #to-do
+    #delete old spiral
     #performance
     #change step number via user input
     #zoom-function?

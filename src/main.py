@@ -5,9 +5,9 @@ import wx
 #import functions
 from check_prime import check_Prime
  
-###############################
-########### ulam spiral #######
-###############################
+###################################
+########### ulam spiral ###########
+###################################
 
 class MainWindow(wx.Frame):
 
@@ -30,6 +30,8 @@ class MainWindow(wx.Frame):
         #create Window
         wx.Frame.__init__(self, None, title=title,size=(self.windowWidth,self.windowHeight))
         self.panel = wx.Panel(self) 
+        #box is temp container in top of the panel where the spiral is drawn
+        self.box = wx.StaticBox(self.panel, wx.ID_ANY,  size=(self.windowWidth,self.windowHeight)) 
         
         #toolbar
         tb = wx.ToolBar( self, -1,) 
@@ -61,7 +63,10 @@ class MainWindow(wx.Frame):
     def getUserInput(self, event):
         self.numberRange = int(self.spiralSize.GetValue())
         self.chosenChar = self.chooseChar.GetString(self.chooseChar.GetSelection())
-        self.resetSpiral(self)
+        if self.numberRange > 0:
+            self.resetSpiral(self)
+        else:
+            print("Bitte Wert größer 0 eingeben")
 
     #delete the last drawn spiral and reset positions
     def resetSpiral(self, event):
@@ -70,7 +75,8 @@ class MainWindow(wx.Frame):
         self.curPosX = (self.windowWidth/2)
         self.curPosY = (self.windowHeight/2)
         #delete old spiral
-
+        self.box.Destroy()
+        self.box = wx.StaticBox(self.panel, wx.ID_ANY,  size=(self.windowWidth,self.windowHeight)) 
         #print new spiral
         self.printSpiral(self, self.chosenChar)
 
@@ -96,7 +102,7 @@ class MainWindow(wx.Frame):
             
             #print current number if its prime
             if(check_Prime(i) == True):
-                label = wx.StaticText(self.panel, label = char, pos = (self.curPosX,self.curPosY))
+                label = wx.StaticText(self.box, wx.ID_ANY, label = char, pos = (self.curPosX,self.curPosY))
             
             tmpCounter = tmpCounter + 1
             iteration = iteration + 1
@@ -115,6 +121,7 @@ class MainWindow(wx.Frame):
                     stepCounter = stepCounter + 1
                     tmpCounter = 0
                     iteration = 1
+
 
 app = wx.App()
 frame = MainWindow(None, "Ulam Spiral")
