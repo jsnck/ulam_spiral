@@ -1,6 +1,6 @@
 #to-do
     #performance
-    #change variables in application (step number, number of values, displayed char)
+    #change step number via user input
     #zoom-function?
     #structure of app -> window separate?
     # variatons like thicker dots for more dividers
