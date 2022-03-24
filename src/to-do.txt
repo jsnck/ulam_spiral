@@ -4,3 +4,4 @@
     #zoom-function?
     #structure of app -> window separate?
     # variatons like thicker dots for more dividers
+    # dynamic layout

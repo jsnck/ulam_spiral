@@ -20,7 +20,7 @@ tmpCounter = 0
 iteration = 0
 
 #change here number of steps and range
-numberRange = 100000
+numberRange = 1000
 #####size of window#####
 #get size of display
 width, height = wx.GetDisplaySize()
@@ -32,14 +32,20 @@ curPosX = (windowWidth/2)
 curPosY = (windowHeight/2)
 step = (windowWidth/numberRange) + 1
 
+#to-do
+#dynmaic sizing of control box and print box
+
 #create window
 window = wx.Frame(None, title = "Ulam spiral", size = (windowWidth,windowHeight))
 panel = wx.Panel(window)
+heightControls = 50
+box = wx.StaticBox(panel, wx.ID_ANY, size =(windowWidth-2, heightControls), pos =(1, 1))
+box = wx.StaticBox(panel, wx.ID_ANY, size =(windowWidth-2, windowHeight-heightControls*1.8), pos =(1, heightControls+1))
 
 
 #print spiral
 for i in range (1, numberRange+1):
-    
+
     if direction == 1: #rigth
         curPosX = curPosX + step
     elif direction == 2: #up
@@ -51,7 +57,7 @@ for i in range (1, numberRange+1):
     
     #print current number if its prime
     if(check_Prime(i) == True):
-        label = wx.StaticText(panel, label = ".", pos = (curPosX,curPosY))
+        label = wx.StaticText(box, label = ".", pos = (curPosX,curPosY))
     
     tmpCounter = tmpCounter + 1
     iteration = iteration + 1
